@@ -55,7 +55,7 @@ public class SimpleMappingExceptionResolver extends AbstractHandlerExceptionReso
 
 	private Integer defaultStatusCode;
 
-	private Map<String, Integer> statusCodes = new HashMap<String, Integer>();
+	private Map<String, Integer> statusCodes = new HashMap<>();
 
 	private String exceptionAttribute = DEFAULT_EXCEPTION_ATTRIBUTE;
 

@@ -121,7 +121,7 @@ class ComponentScanAnnotationParser {
 			scanner.getBeanDefinitionDefaults().setLazyInit(true);
 		}
 
-		Set<String> basePackages = new LinkedHashSet<String>();
+		Set<String> basePackages = new LinkedHashSet<>();
 		String[] basePackagesArray = componentScan.getAliasedStringArray("basePackages", ComponentScan.class, declaringClass);
 		for (String pkg : basePackagesArray) {
 			String[] tokenized = StringUtils.tokenizeToStringArray(this.environment.resolvePlaceholders(pkg),
@@ -145,14 +145,14 @@ class ComponentScanAnnotationParser {
 	}
 
 	private List<TypeFilter> typeFiltersFor(AnnotationAttributes filterAttributes) {
-		List<TypeFilter> typeFilters = new ArrayList<TypeFilter>();
+		List<TypeFilter> typeFilters = new ArrayList<>();
 		FilterType filterType = filterAttributes.getEnum("type");
 
 		for (Class<?> filterClass : filterAttributes.getAliasedClassArray("classes", ComponentScan.Filter.class, null)) {
 			switch (filterType) {
 				case ANNOTATION:
 					Assert.isAssignable(Annotation.class, filterClass,
-							"An error occured while processing a @ComponentScan ANNOTATION type filter: ");
+							"An error occurred while processing a @ComponentScan ANNOTATION type filter: ");
 					@SuppressWarnings("unchecked")
 					Class<Annotation> annotationType = (Class<Annotation>) filterClass;
 					typeFilters.add(new AnnotationTypeFilter(annotationType));
@@ -162,7 +162,7 @@ class ComponentScanAnnotationParser {
 					break;
 				case CUSTOM:
 					Assert.isAssignable(TypeFilter.class, filterClass,
-							"An error occured while processing a @ComponentScan CUSTOM type filter: ");
+							"An error occurred while processing a @ComponentScan CUSTOM type filter: ");
 					TypeFilter filter = BeanUtils.instantiateClass(filterClass, TypeFilter.class);
 					invokeAwareMethods(filter);
 					typeFilters.add(filter);
